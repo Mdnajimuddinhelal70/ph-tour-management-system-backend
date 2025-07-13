@@ -3,6 +3,7 @@ import { Server } from "http";
 import mongoose from "mongoose";
 import app from "./app";
 import { envVars } from "./app/config/env";
+import { seedSuperAdmin } from "./app/utils/seedSuperAdmin";
 
 let server: Server;
 
@@ -18,7 +19,10 @@ const startServer = async () => {
   }
 };
 
-startServer();
+(async () => {
+  await startServer();
+  await seedSuperAdmin();
+})();
 
 //unhandle rejection error
 process.on("unhandledRejection", (err) => {
@@ -64,8 +68,6 @@ process.on("uncaughtException", (err) => {
   }
   process.exit(1);
 });
-// Promise.reject(new Error("I forgot to catch this promise"));
-// throw new Error("I forgot to handle this local error");
 
 /**some error handling
  * unhandle rejection error
