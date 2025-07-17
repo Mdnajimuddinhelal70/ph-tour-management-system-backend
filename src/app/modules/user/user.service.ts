@@ -9,16 +9,11 @@ import { User } from "./user.model";
 const createUser = async (payload: Partial<IUser>) => {
   const { email, password, ...rest } = payload;
 
-  const isUserExists = await User.findOne({ email });
+  // const isUserExists = await User.findOne({ email });
 
-  if (isUserExists) {
-    throw new AppError(httpStatus.BAD_REQUEST, "User already exists");
-  }
-
-  // Use hashed password
   const hashedPassword = await bcryptjs.hash(
     password as string,
-    Number(envVars.DB_URL)
+    Number(envVars.BCRYPT_SALT_ROUND)
   );
 
   const authProvider: IAuthProvider = {
