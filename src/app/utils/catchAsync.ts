@@ -15,7 +15,6 @@ export const catchAsync =
       if (envVars.NODE_ENV === "development") {
         console.log(err);
       }
-
       next(err);
     });
   };

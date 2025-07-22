@@ -55,8 +55,8 @@ passport.use(
 passport.use(
   new GoogleStrategy(
     {
-      clientID: envVars.GOOGOLE_CLIENT_ID,
-      clientSecret: envVars.GOOGOLE_CLIENT_SECRET,
+      clientID: envVars.GOOGLE_CLIENT_ID,
+      clientSecret: envVars.GOOGLE_CLIENT_SECRET,
       callbackURL: envVars.GOOGLE_CALLBACK_URL,
     },
     async (
