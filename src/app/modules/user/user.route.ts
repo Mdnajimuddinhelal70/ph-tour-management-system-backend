@@ -20,6 +20,7 @@ router.get(
   checkAuth(Role.GUIDE, Role.SUPER_ADMIN),
   UserControllers.getAllUsers
 );
+router.get("/me", checkAuth(...Object.values(Role)), UserControllers.getMe);
 router.patch(
   "/:id",
   validateRequest(updateUserZodSchema),
