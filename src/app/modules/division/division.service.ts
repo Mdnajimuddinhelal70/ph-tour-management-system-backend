@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import statusCodes from "http-status-codes";
+import { deleteImageFromCloudinary } from "../../config/cloudinary.config";
 import AppError from "../../errorHelpers/appError";
 import { IDivision } from "./division.interface";
 import { Division } from "./division.model";
@@ -76,6 +77,10 @@ const updateDivision = async (id: string, payload: Partial<IDivision>) => {
     new: true,
     runValidators: true,
   });
+
+  if (payload.thumbnail && existingDivision.thumbnail) {
+    await deleteImageFromCloudinary(existingDivision.thumbnail);
+  }
   return updateDivision;
 };
 
